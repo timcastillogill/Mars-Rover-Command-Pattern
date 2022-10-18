@@ -1,28 +1,26 @@
 public class CommandManager {
+    private Coordinates coordinates;
 
-	private Coordinates coordinates;
+    public CommandManager(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
 
-	public CommandManager(Coordinates coordinates) {
-		this.coordinates = coordinates;
-	}
+    public Command commandHub(char command) {
+        switch (command) {
+            case 'R' -> {
+                return new RightRotation();
+            }
+            case 'L' -> {
+                return new LeftRotation();
+            }
+            case 'M' -> {
+                return new MoveForward();
+            }
+            default -> throw new RuntimeException("Unknown command");
+        }
+    }
 
-	public void commandHub(char command) {
-		if (command == 'R')  {
-			RightRotation rightRotation = new RightRotation(coordinates);
-			rightRotation.execute();
-		}
-		if (command == 'L')  {
-			LeftRotation leftRotation = new LeftRotation(coordinates);
-			leftRotation.execute();
-		}
-
-		if (command == 'M') {
-			MoveForward moveForward = new MoveForward(coordinates);
-			moveForward.execute();
-		}
-	}
-
-	public String getFormattedPosition() {
-		return coordinates.currentMarsRoverPosition();
-	}
+    public String getFormattedPosition() {
+        return coordinates.currentMarsRoverPosition();
+    }
 }

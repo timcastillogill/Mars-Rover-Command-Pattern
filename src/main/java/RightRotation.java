@@ -1,26 +1,12 @@
 public class RightRotation implements Command {
 
-	Coordinates coordinates;
-
-	public RightRotation(Coordinates coordinates) {
-		this.coordinates = coordinates;
-	}
-
-	@Override
-	public void execute() {
-		switch (coordinates.getCompassDirection()) {
-			case "E":
-				coordinates.changeDirection("S");
-				break;
-			case "S":
-				coordinates.changeDirection("W");
-				break;
-			case "W":
-				coordinates.changeDirection("N");
-				break;
-			case "N":
-				coordinates.changeDirection("E");
-				break;
-		}
-	}
+    @Override
+    public void execute(MarsRover rover) {
+        switch (rover.coordinates.getCompassDirection()) {
+            case "E" -> rover.coordinates.changeDirection("S");
+            case "S" -> rover.coordinates.changeDirection("W");
+            case "W" -> rover.coordinates.changeDirection("N");
+            case "N" -> rover.coordinates.changeDirection("E");
+        }
+    }
 }

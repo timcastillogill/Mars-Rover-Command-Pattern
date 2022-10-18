@@ -1,11 +1,12 @@
 public class MarsRover {
-	private Coordinates coordinates = new Coordinates();
-	private CommandManager commandManager = new CommandManager(coordinates);
+    protected final Coordinates coordinates = new Coordinates();
+    private final CommandManager commandManager = new CommandManager(coordinates);
 
-	public String execute(String command) {
-		for (char c : command.toCharArray()) {
-			commandManager.commandHub(c);
-		}
-		return commandManager.getFormattedPosition();
-	}
+    public String execute(String inputCommands) {
+        for (char command : inputCommands.toCharArray()) {
+            Command commandToExecute = commandManager.commandHub(command);
+            commandToExecute.execute(this);
+        }
+        return commandManager.getFormattedPosition();
+    }
 }
