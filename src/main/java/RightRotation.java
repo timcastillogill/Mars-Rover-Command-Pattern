@@ -1,7 +1,7 @@
 public class RightRotation implements Command {
 
     @Override
-    public void execute(MarsRover rover) {
+    public void execute(MarsRover rover, Coordinates coordinates) {
         switch (rover.coordinates.getCompassDirection()) {
             case "E" -> rover.coordinates.changeDirection("S");
             case "S" -> rover.coordinates.changeDirection("W");

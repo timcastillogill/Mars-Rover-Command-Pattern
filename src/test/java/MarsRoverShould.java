@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -10,7 +11,11 @@ public class MarsRoverShould {
 
 	@BeforeEach
 	void setup() {
-	    rover = new MarsRover();
+		PositionPrinter positionPrinter = new PositionPrinter();
+		Coordinates coordinates = new Coordinates(positionPrinter);
+		CommandFactory commandFactory = new CommandFactory();
+		CommandManager commandManager = new CommandManager(coordinates, commandFactory);
+	    rover = new MarsRover(coordinates, commandManager);
 	}
 
 	@ParameterizedTest
@@ -72,5 +77,10 @@ public class MarsRoverShould {
 	})
 	public void moves_to_opposite_wall_when_wall_is_hit(String commands, String expected) {
 		assertThat(rover.execute(commands)).isEqualTo(expected);
+	}
+
+	@Test
+	public void moves_more_out_of_game_border() {
+		assertThat(rover.execute("RMLLMM")).isEqualTo("9:0:W");
 	}
 }
