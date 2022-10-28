@@ -1,23 +1,14 @@
 public class CommandManager {
-    private Coordinates coordinates;
+    private final Coordinates coordinates;
+    private final CommandFactory commandFactory;
 
-    public CommandManager(Coordinates coordinates) {
+    public CommandManager(Coordinates coordinates, CommandFactory commandFactory) {
         this.coordinates = coordinates;
+        this.commandFactory = commandFactory;
     }
 
     public Command commandHub(char command) {
-        switch (command) {
-            case 'R' -> {
-                return new RightRotation();
-            }
-            case 'L' -> {
-                return new LeftRotation();
-            }
-            case 'M' -> {
-                return new MoveForward();
-            }
-            default -> throw new RuntimeException("Unknown command");
-        }
+        return commandFactory.createCommand(command);
     }
 
     public String getFormattedPosition() {
