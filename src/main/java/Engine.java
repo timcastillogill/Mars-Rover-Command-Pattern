@@ -1,4 +1,4 @@
-public class MoveForward implements Command {
+public class Engine implements Command {
 
 	@Override
 	public void execute(MarsRover rover, Coordinates coordinates, CompassDirection compassDirection) {

@@ -14,25 +14,31 @@ class CommandManagerShould {
 	@Mock
 	CommandFactory commandFactory;
 
-	@Mock PositionPrinter positionPrinter;
+	@Mock
+	PositionPrinter positionPrinter;
 	private CommandManager commandManager;
 
 	@BeforeEach
 	void setUp() {
-		commandManager = new CommandManager(commandFactory, positionPrinter);
+		commandManager = new CommandManager(commandFactory, positionPrinter, coordinates);
 	}
 
 	@Test
-	public void command_created_for_command_factory() {
+	public void create_a_right_for_command_factory() {
 		commandManager.commandHub('R');
 		verify(commandFactory).createCommand('R');
 	}
 
 	@Test
-	public void position_formatter_called() {
-		commandManager.getFormattedPosition();
-		verify(positionPrinter).printMarsRoverPosition();
+	public void create_a_left_for_command_factory() {
+		commandManager.commandHub('L');
+		verify(commandFactory).createCommand('L');
 	}
 
+	@Test
+	public void position_formatter_called() {
+		commandManager.getFormattedPosition();
+		verify(positionPrinter).printMarsRoverPosition(coordinates);
+	}
 
 }

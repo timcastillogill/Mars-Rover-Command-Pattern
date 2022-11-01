@@ -3,9 +3,12 @@ public class CommandManager {
 
 	private final PositionPrinter positionPrinter;
 
-	public CommandManager(CommandFactory commandFactory, PositionPrinter positionPrinter) {
+	private final Coordinates coordinates;
+
+	public CommandManager(CommandFactory commandFactory, PositionPrinter positionPrinter, Coordinates coordinates) {
 		this.commandFactory = commandFactory;
 		this.positionPrinter = positionPrinter;
+		this.coordinates = coordinates;
 	}
 
 	public Command commandHub(char command) {
@@ -13,6 +16,6 @@ public class CommandManager {
 	}
 
 	public String getFormattedPosition() {
-		return positionPrinter.printMarsRoverPosition();
+		return positionPrinter.printMarsRoverPosition(coordinates);
 	}
 }
