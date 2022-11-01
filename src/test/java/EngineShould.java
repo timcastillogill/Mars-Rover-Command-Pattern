@@ -19,33 +19,37 @@ class EngineShould {
 	@Test
 	public void move_rover_one_space_forward_when_facing_east() {
 		Engine engine = new Engine();
-		given(compassDirection.getCompassDirection()).willReturn("E");
-		engine.execute(rover, coordinates, compassDirection);
-		verify(coordinates).changePosition(1, 0);
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		given(compassDirection.getStringCompassDirection()).willReturn("E");
+		engine.execute(rover);
+		verify(rover).changePosition(1, 0);
 	}
 
 	@Test
 	public void move_rover_one_space_forward_when_facing_south() {
 		Engine engine = new Engine();
-		given(compassDirection.getCompassDirection()).willReturn("S");
-		engine.execute(rover, coordinates, compassDirection);
-		verify(coordinates).changePosition(0, -1);
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		given(compassDirection.getStringCompassDirection()).willReturn("S");
+		engine.execute(rover);
+		verify(rover).changePosition(0, -1);
 	}
 
 	@Test
 	public void move_rover_one_space_forward_when_facing_west() {
 		Engine engine = new Engine();
-		given(compassDirection.getCompassDirection()).willReturn("W");
-		engine.execute(rover, coordinates, compassDirection);
-		verify(coordinates).changePosition(-1, 0);
+		given(compassDirection.getStringCompassDirection()).willReturn("W");
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		engine.execute(rover);
+		verify(rover).changePosition(-1, 0);
 	}
 
 	@Test
 	public void move_rover_one_space_forward_when_facing_north() {
 		Engine engine = new Engine();
-		given(compassDirection.getCompassDirection()).willReturn("N");
-		engine.execute(rover, coordinates, compassDirection);
-		verify(coordinates).changePosition(0, 1);
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		given(compassDirection.getStringCompassDirection()).willReturn("N");
+		engine.execute(rover);
+		verify(rover).changePosition(0, 1);
 	}
 
 }

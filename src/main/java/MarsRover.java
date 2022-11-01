@@ -12,8 +12,20 @@ public class MarsRover {
     public String execute(String inputCommands) {
         for (char command : inputCommands.toCharArray()) {
             Command commandToExecute = commandManager.commandHub(command);
-            commandToExecute.execute(this, this.coordinates, this.compassDirection);
+            commandToExecute.execute(this);
         }
         return commandManager.getFormattedPosition();
+    }
+
+    public CompassDirection getCompassDirection() {
+        return compassDirection;
+    }
+
+    public void changePosition(int x, int y) {
+        this.coordinates.changePosition(x, y);
+    }
+
+    public void changeDirection(String direction) {
+        getCompassDirection().changeDirection(direction);
     }
 }
