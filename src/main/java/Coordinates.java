@@ -17,12 +17,8 @@ public class Coordinates {
 		ifEdgeIsHit();
 	}
 
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
+	public CoordinatesDto toDto() {
+		return new CoordinatesDto(this.x, this.y, compassDirection.getCompassDirection());
 	}
 
 	private void ifEdgeIsHit() {

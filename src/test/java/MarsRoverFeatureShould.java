@@ -13,9 +13,9 @@ public class MarsRoverFeatureShould {
 	void setup() {
 		CompassDirection compassDirection = new CompassDirection();
 		Coordinates coordinates = new Coordinates(compassDirection);
-		PositionPrinter positionPrinter = new PositionPrinter(coordinates, compassDirection);
+		PositionPrinter positionPrinter = new PositionPrinter();
 		CommandFactory commandFactory = new CommandFactory();
-		CommandManager commandManager = new CommandManager(commandFactory, positionPrinter);
+		CommandManager commandManager = new CommandManager(commandFactory, positionPrinter, coordinates);
 	    rover = new MarsRover(coordinates, commandManager, compassDirection);
 	}
 
