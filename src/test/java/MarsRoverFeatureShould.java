@@ -5,17 +5,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MarsRoverShould {
+public class MarsRoverFeatureShould {
 
 	private MarsRover rover;
 
 	@BeforeEach
 	void setup() {
-		PositionPrinter positionPrinter = new PositionPrinter();
-		Coordinates coordinates = new Coordinates(positionPrinter);
+		CompassDirection compassDirection = new CompassDirection();
+		Coordinates coordinates = new Coordinates(compassDirection);
+		PositionPrinter positionPrinter = new PositionPrinter(coordinates, compassDirection);
 		CommandFactory commandFactory = new CommandFactory();
-		CommandManager commandManager = new CommandManager(coordinates, commandFactory);
-	    rover = new MarsRover(coordinates, commandManager);
+		CommandManager commandManager = new CommandManager(commandFactory, positionPrinter);
+	    rover = new MarsRover(coordinates, commandManager, compassDirection);
 	}
 
 	@ParameterizedTest

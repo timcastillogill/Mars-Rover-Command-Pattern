@@ -13,11 +13,13 @@ class CommandManagerShould {
 	Coordinates coordinates;
 	@Mock
 	CommandFactory commandFactory;
+
+	@Mock PositionPrinter positionPrinter;
 	private CommandManager commandManager;
 
 	@BeforeEach
 	void setUp() {
-		commandManager = new CommandManager(coordinates, commandFactory);
+		commandManager = new CommandManager(commandFactory, positionPrinter);
 	}
 
 	@Test
@@ -29,7 +31,7 @@ class CommandManagerShould {
 	@Test
 	public void position_formatter_called() {
 		commandManager.getFormattedPosition();
-		verify(coordinates).currentMarsRoverPosition();
+		verify(positionPrinter).printMarsRoverPosition();
 	}
 
 

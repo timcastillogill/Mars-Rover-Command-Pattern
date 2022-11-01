@@ -1,58 +1,65 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
 
+@ExtendWith(MockitoExtension.class)
 class CoordinatesShould {
 
 	private Coordinates coordinates;
+	private PositionPrinter positionPrinter;
+	@Mock CompassDirection compassDirection;
 
 	@BeforeEach
 	void setUp() {
-		PositionPrinter positionPrinter = new PositionPrinter();
-		coordinates = new Coordinates(positionPrinter);
+		coordinates = new Coordinates(compassDirection);
+		positionPrinter = new PositionPrinter(coordinates, compassDirection);
 	}
 
 	@Test
-	public void if_boundry_is_hit_west_on_0_y() {
-		coordinates.changeDirection("W");
+	public void wraps_around_world_when_hits_edge_facing_west_on_0_y() {
+		given(compassDirection.getCompassDirection()).willReturn("W");
 		coordinates.changePosition(-1, 0);
-		assertThat(coordinates.currentMarsRoverPosition()).isEqualTo("9:0:W");
+		assertThat(positionPrinter.printMarsRoverPosition()).isEqualTo("9:0:W");
 	}
 
 	@Test
-	public void if_boundry_is_hit_east_on_0_y() {
-		coordinates.changeDirection("E");
+	public void wraps_around_world_when_hits_edge_facing_east_on_0_y() {
+		given(compassDirection.getCompassDirection()).willReturn("E");
 		coordinates.changePosition(10, 0);
-		assertThat(coordinates.currentMarsRoverPosition()).isEqualTo("0:0:E");
+		assertThat(positionPrinter.printMarsRoverPosition()).isEqualTo("0:0:E");
 	}
 
 	@Test
-	public void if_boundry_is_hit_north_on_0_x() {
-		coordinates.changeDirection("N");
+	public void wraps_around_world_when_hits_edge_facing_north_on_0_x() {
+		given(compassDirection.getCompassDirection()).willReturn("N");
 		coordinates.changePosition(0, 10);
-		assertThat(coordinates.currentMarsRoverPosition()).isEqualTo("0:0:N");
+		assertThat(positionPrinter.printMarsRoverPosition()).isEqualTo("0:0:N");
 	}
 
 	@Test
-	public void if_boundry_is_hit_south_on_0_x() {
-		coordinates.changeDirection("S");
+	public void wraps_around_world_when_hits_edge_facing_south_on_0_x() {
+		given(compassDirection.getCompassDirection()).willReturn("S");
 		coordinates.changePosition(0, 9);
-		assertThat(coordinates.currentMarsRoverPosition()).isEqualTo("0:9:S");
+		assertThat(positionPrinter.printMarsRoverPosition()).isEqualTo("0:9:S");
 	}
 
 	@Test
-	public void if_boundry_is_hit_north_on_5_x() {
-		coordinates.changeDirection("N");
+	public void wraps_around_world_when_hits_edge_facing_north_on_5_x() {
+		given(compassDirection.getCompassDirection()).willReturn("N");
 		coordinates.changePosition(5, 10);
-		assertThat(coordinates.currentMarsRoverPosition()).isEqualTo("5:0:N");
+		assertThat(positionPrinter.printMarsRoverPosition()).isEqualTo("5:0:N");
 	}
 
 	@Test
-	public void if_boundry_is_hit_west_on_5_y() {
-		coordinates.changeDirection("W");
+	public void wraps_around_world_when_hits_edge_facing_west_on_5_y() {
+		given(compassDirection.getCompassDirection()).willReturn("W");
 		coordinates.changePosition(-1, 5);
-		assertThat(coordinates.currentMarsRoverPosition()).isEqualTo("9:5:W");
+		assertThat(positionPrinter.printMarsRoverPosition()).isEqualTo("9:5:W");
 	}
 
 }
