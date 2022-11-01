@@ -1,3 +1,3 @@
 public interface Command {
-	void execute(MarsRover rover, Coordinates coordinates, CompassDirection compassDirection);
+	void execute(MarsRover rover);
 }

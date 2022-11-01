@@ -18,7 +18,7 @@ public class Coordinates {
 	}
 
 	public CoordinatesDto toDto() {
-		return new CoordinatesDto(this.x, this.y, compassDirection.getCompassDirection());
+		return new CoordinatesDto(this.x, this.y, compassDirection.getStringCompassDirection());
 	}
 
 	private void ifEdgeIsHit() {
@@ -26,10 +26,10 @@ public class Coordinates {
 		int MAX_BOARD_Y = 9;
 		int MIN_BOARD_Y = 0;
 		int MIN_BOARD_X = 0;
-		if (x < 0 && compassDirection.getCompassDirection().equals("W")) this.x = MAX_BOARD_X;
-		if (y < 0 && compassDirection.getCompassDirection().equals("S")) this.y = MAX_BOARD_Y;
-		if (y >= 10 && compassDirection.getCompassDirection().equals("N")) this.y = MIN_BOARD_Y;
-		if (x >= 10 && compassDirection.getCompassDirection().equals("E")) this.x = MIN_BOARD_X;
+		if (x < 0 && compassDirection.getStringCompassDirection().equals("W")) this.x = MAX_BOARD_X;
+		if (y < 0 && compassDirection.getStringCompassDirection().equals("S")) this.y = MAX_BOARD_Y;
+		if (y >= 10 && compassDirection.getStringCompassDirection().equals("N")) this.y = MIN_BOARD_Y;
+		if (x >= 10 && compassDirection.getStringCompassDirection().equals("E")) this.x = MIN_BOARD_X;
 	}
 
 }

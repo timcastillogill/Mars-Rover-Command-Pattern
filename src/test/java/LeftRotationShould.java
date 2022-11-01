@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -12,40 +13,43 @@ class LeftRotationShould {
 	@Mock
 	MarsRover rover;
 	@Mock
-	Coordinates coordinates;
-	@Mock
 	CompassDirection compassDirection;
+	private LeftRotation leftRotation;
 
-	@Test
-	public void move_rover_one_space_forward_when_facing_west() {
-		LeftRotation leftRotation = new LeftRotation();
-		given(compassDirection.getCompassDirection()).willReturn("W");
-		leftRotation.execute(rover, coordinates, compassDirection);
-		verify(compassDirection).changeDirection("S");
+	@BeforeEach
+	void setUp() {
+		leftRotation = new LeftRotation();
 	}
 
 	@Test
+	public void move_rover_one_space_forward_when_facing_west() {
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		given(compassDirection.getStringCompassDirection()).willReturn("W");
+		leftRotation.execute(rover);
+		verify(rover).changeDirection("S");
+	}
+	@Test
 	public void move_rover_one_space_forward_when_facing_south() {
-		LeftRotation leftRotation = new LeftRotation();
-		given(compassDirection.getCompassDirection()).willReturn("S");
-		leftRotation.execute(rover, coordinates, compassDirection);
-		verify(compassDirection).changeDirection("E");
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		given(compassDirection.getStringCompassDirection()).willReturn("S");
+		leftRotation.execute(rover);
+		verify(rover).changeDirection("E");
 	}
 
 	@Test
 	public void move_rover_one_space_forward_when_facing_east() {
-		LeftRotation leftRotation = new LeftRotation();
-		given(compassDirection.getCompassDirection()).willReturn("E");
-		leftRotation.execute(rover, coordinates, compassDirection);
-		verify(compassDirection).changeDirection("N");
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		given(compassDirection.getStringCompassDirection()).willReturn("E");
+		leftRotation.execute(rover);
+		verify(rover).changeDirection("N");
 	}
 
 	@Test
 	public void move_rover_one_space_forward_when_facing_north() {
-		LeftRotation leftRotation = new LeftRotation();
-		given(compassDirection.getCompassDirection()).willReturn("N");
-		leftRotation.execute(rover, coordinates, compassDirection);
-		verify(compassDirection).changeDirection("W");
+		given(rover.getCompassDirection()).willReturn(compassDirection);
+		given(compassDirection.getStringCompassDirection()).willReturn("N");
+		leftRotation.execute(rover);
+		verify(rover).changeDirection("W");
 	}
 
 

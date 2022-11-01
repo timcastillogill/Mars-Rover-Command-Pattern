@@ -9,7 +9,7 @@ public class CompassDirection {
 		compassDirection = newDirection;
 	}
 
-	public String getCompassDirection() {
+	public String getStringCompassDirection() {
 		return compassDirection;
 	}
 }
